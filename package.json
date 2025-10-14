@@ -1,0 +1,19 @@
+{
+  "name": "api1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-get": "nodemon express-server-get.js",
+    "dev-post": "nodemon express-server-post.js",
+    "dev-db": "nodemon express-server-bdd.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.3"
+  }
+}
