@@ -1,31 +1,27 @@
 const express = require('express');
 const { client, connectDB } = require('./utils/db_utils');
+const { logHeaders, tokenPresent, firewall} = require('./middlewares');
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(express.static('templates'));
 
-function loggerMiddleware(req, res, next){
-    console.log ("nouvelle requête entrante");
-    next();
-}
+app.use(logHeaders);
+app.use(firewall);
 
-app.use(loggerMiddleware)
-
-app.post('/test', (req, res) => {
-    res.json(req.body);
+app.get('/hello', (req, res) => {
+    return res.send('<h1>hello</h1>');
 });
 
-app.get('/users', async (req, res) => {
-    try {
-        const result = await client.query('SELECT * FROM users;');
-        res.json(result.rows);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Erreur SQL');
-    }
+app.get('/restricted1', tokenPresent, (req, res) => {
+    return res.status(200).json({
+        message: 'topsecret',
+    });
+});
+
+app.get('/restricted2', tokenPresent, (req, res) => {
+    return res.status(200).send('<h1>Admin space</h1>');
 });
 
 (async () => {

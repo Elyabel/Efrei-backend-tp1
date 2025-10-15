@@ -7,6 +7,7 @@
     "dev-get": "nodemon express-server-get.js",
     "dev-post": "nodemon express-server-post.js",
     "dev-db": "nodemon express-server-bdd.js",
+    "dev-auth": "nodemon express-server-auth.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
