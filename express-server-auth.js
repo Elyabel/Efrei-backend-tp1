@@ -6,9 +6,10 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(express.static('templates'));
 
-app.use(logHeaders);
 app.use(firewall);
+app.use(logHeaders);
 
 app.get('/hello', (req, res) => {
     return res.send('<h1>hello</h1>');

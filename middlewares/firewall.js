@@ -1,5 +1,10 @@
 module.exports = (req, res, next) => {
-    const availableUrls = ['http://localhost:3000'];
-    console.log(req);
+    const availableEndpoints = ['/restricted1'];
+    availableEndpoints.forEach(endpoint => {
+        if (req.originalUrl !== endpoint) {
+            return res.status(403).send('Not authorized');
+        }
+    });
+
     next();
 };
